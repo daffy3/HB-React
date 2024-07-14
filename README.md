@@ -7,10 +7,10 @@
 -   경로: `https://ui.shadcn.com/docs/installation`
 -   설치: `npm create vite@latest` <br />
     `npm install -D tailwindcss postcss autoprefixer` <br />
-    `npx tailwindcss init -p` <br /><br />
+    `npx tailwindcss init -p` <br />
+    `npm install -D sass` <br /><br />
     Add the following code to the vite.config.ts so your app can resolve paths without error <br />
     `npm i -D @types/node` <br />
-    `npm install -D sass`
 
 2. 리액트 라우터 설치: `npm install react-router-dom` <br />
    `npm install localforage match-sorter sort-by`
