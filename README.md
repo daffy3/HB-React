@@ -14,7 +14,7 @@
 
 2. 리액트 라우터 설치: `npm install react-router-dom` <br />
    `npm install localforage match-sorter sort-by`
-3. Shadcn UI 설치: `npx shadcn-ui@latest init`
+3. Shadcn UI 설치: `npx shadcn-ui@latest init` <br />
    Button - `npx shadcn-ui@latest add button` <br />
    Badge - `npx shadcn-ui@latest add badge` <br />
    Card - `npx shadcn-ui@latest add card` <br />
