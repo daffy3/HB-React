@@ -9,4 +9,12 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src"),
         },
     },
+    // SCSS 전역 사용
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "./src/assets/styles/main.scss";`,
+            },
+        },
+    },
 });
