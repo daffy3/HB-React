@@ -9,7 +9,7 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src"),
         },
     },
-    // SCSS 전역 사용
+    // SCSS 전역에서 사용할 수 있도록 자동 Import
     css: {
         preprocessorOptions: {
             scss: {
