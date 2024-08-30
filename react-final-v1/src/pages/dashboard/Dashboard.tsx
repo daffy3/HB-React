@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-import { AstronomyPhotoOfTodayType } from "@/types/astronomy-today";
-import { NASAImageAndVideoLibraryType } from "@/types/astronomy-imageAndVideo";
-import { AstronomyEpic } from "@/types/astronomy-epic";
 
 import CommonHeader from "@/components/organisms/header/CommonHeader";
 import WidgetSummary from "@/components/molecules/dashboard/widget-summary/WidgetSummary";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { Image } from "lucide-react";
 import styles from "./page.module.scss";
+import { useEffect, useState } from "react";
+import { NASAImageAndVideoLibraryType } from "@/types/astronomy-imageAndVideo";
+import { AstronomyPhotoOfTodayType } from "@/types/astronomy-today";
+import { AstronomyEpic } from "@/types/astronomy-epic";
+import { Card } from "@/components/ui/card";
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { Image } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 interface TData {
     copyright: string;
@@ -28,21 +28,24 @@ interface TData {
 function Dashboard() {
     // 오늘의 천문사진 API 조회
     const [astronomyPhotoOfToday, setAstronomyPhotoOfToday] = useState<AstronomyPhotoOfTodayType>({
+        copyright: "",
         date: "",
         explanation: "",
+        hdurl: "",
         media_type: "",
         service_version: "",
         title: "",
         url: "",
     });
-    const fetchAstronomyPhotoOfTodayApi = async () => {
+    const fetchAstronomyPhotoOfToday = async () => {
         const API_KEY = "FTwwmPy8pQlNtzNIBwyzWDE044Wehv4iKUzjqtGo";
         const res = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
-
+        console.log(res);
         setAstronomyPhotoOfToday(res.data);
     };
 
     // ====================================================================================================
+
     // NASA 이미지 및 비디오 라이브러리 API 조회
     const [NASAImageAndVideoLibrary, setNASAImageAndVideoLibrary] = useState<NASAImageAndVideoLibraryType>({
         center: "",
@@ -56,12 +59,13 @@ function Dashboard() {
         secondary_creator: "",
         title: "",
     });
-    const fetchNASAImageAndVideoLibraryApi = async () => {
+    const fetchNASAImageAndVideoLibrary = async () => {
         const res = await axios.get(`https://images-api.nasa.gov/search?q=orion`);
         setNASAImageAndVideoLibrary(res.data.collection.items[5].data[0]);
     };
 
     // ====================================================================================================
+
     // 지구 다색 이미지 카메라 API 조회
     const [epic, setEpic] = useState<AstronomyEpic>({
         attitude_quaternions: { q0: 0, q1: 0, q2: 0, q3: 0 },
@@ -84,8 +88,7 @@ function Dashboard() {
     });
     const fetchEpicApi = async () => {
         const API_KEY = "FTwwmPy8pQlNtzNIBwyzWDE044Wehv4iKUzjqtGo";
-        const res = await axios.get(`https://api.nasa.gov/EPIC/api/natural/date/2024-08-17?api_key=${API_KEY}`);
-
+        const res = await axios.get(`https://api.nasa.gov/EPIC/api/natural/date/2024-08-27?api_key=${API_KEY}`);
         setEpic(res.data[res.data.length - 1]);
     };
 
@@ -94,7 +97,7 @@ function Dashboard() {
     const [mars, setMars] = useState<TData[]>([]);
     const fetchMarsApi = async () => {
         const API_KEY = "FTwwmPy8pQlNtzNIBwyzWDE044Wehv4iKUzjqtGo";
-        const res = await axios.get(`https://api.nasa.gov/planetary/apod?start_date=2024-07-02&end_date=2024-07-11&api_key=${API_KEY}`);
+        const res = await axios.get(`https://api.nasa.gov/planetary/apod?start_date=2024-07-15&end_date=2024-08-20&api_key=${API_KEY}`);
 
         setMars(res.data);
     };
@@ -102,8 +105,8 @@ function Dashboard() {
     // ====================================================================================================
 
     useEffect(() => {
-        fetchAstronomyPhotoOfTodayApi();
-        fetchNASAImageAndVideoLibraryApi();
+        fetchAstronomyPhotoOfToday();
+        fetchNASAImageAndVideoLibrary();
         fetchEpicApi();
         fetchMarsApi();
     }, []);
@@ -135,12 +138,12 @@ function Dashboard() {
                             <Card>
                                 <Table className="flex flex-col w-full h-full rounded-md">
                                     <TableHeader>
-                                        <TableRow className="bg-muted/50">
+                                        <TableRow>
                                             <TableHead className="text-sm text-center w-[80px]">
                                                 <TooltipProvider delayDuration={100}>
                                                     <Tooltip>
                                                         <TooltipTrigger asChild>
-                                                            <Button variant="ghost" size={"icon"}>
+                                                            <Button variant={"ghost"} size={"icon"}>
                                                                 <Image className="w-[18px] h-[18px]" />
                                                             </Button>
                                                         </TooltipTrigger>
@@ -156,12 +159,12 @@ function Dashboard() {
                                                 <TooltipProvider delayDuration={100}>
                                                     <Tooltip>
                                                         <TooltipTrigger asChild>
-                                                            <Button variant="ghost" size={"sm"}>
+                                                            <Button variant={"ghost"} size={"icon"}>
                                                                 <p>Version</p>
                                                             </Button>
                                                         </TooltipTrigger>
-                                                        <TooltipContent side="bottom">
-                                                            <p>Service Version</p>
+                                                        <TooltipContent>
+                                                            <p className="font-normal">서비스 버전</p>
                                                         </TooltipContent>
                                                     </Tooltip>
                                                 </TooltipProvider>
@@ -176,28 +179,22 @@ function Dashboard() {
                                             return (
                                                 <TableRow className="cursor-pointer" key={item.title}>
                                                     <TableCell className="flex items-center justify-center w-[80px] p-2">
-                                                        {item.media_type === "video" ? (
-                                                            <Image className="w-10 h-10 text-neutral-300" />
-                                                        ) : (
-                                                            <img src={item.url} alt="image" className="w-12 h-12 rounded-md" />
-                                                        )}
+                                                        {item.media_type === "video" ? <Image className="w-10 h-10 text-neutral-300" /> : <img src={item.url} alt="" className="w-12 h-12 rounded-md" />}
                                                     </TableCell>
                                                     <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.title}</TableCell>
                                                     <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.date}</TableCell>
                                                     <TableCell className="table-cell font-normal text-center w-[224px] p-2">
-                                                        <Badge variant="outline" className="px-3 py-1 rounded-md">
+                                                        <Badge variant={"outline"} className="px-3 py-1 rounde-md">
                                                             {item.service_version}
                                                         </Badge>
                                                     </TableCell>
                                                     <TableCell className="table-cell font-normal text-center w-[224px] p-2">
-                                                        <Badge variant="outline" className="px-3 py-1 rounded-md">
+                                                        <Badge variant={"outline"} className="px-3 py-1 rounde-md">
                                                             {item.media_type}
                                                         </Badge>
                                                     </TableCell>
-                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">
-                                                        {item.copyright ? item.copyright : "-"}
-                                                    </TableCell>
-                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">9Diin </TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.copyright ? item.copyright : "-"}</TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">9Diin</TableCell>
                                                 </TableRow>
                                             );
                                         })}
