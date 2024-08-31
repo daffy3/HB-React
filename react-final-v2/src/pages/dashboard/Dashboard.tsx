@@ -6,7 +6,6 @@ import { Badge, Button, Card, Table, TableHeader, TableRow, TableHead, TableBody
 import { Image } from "lucide-react";
 // CSS
 import styles from "./page.module.scss";
-import { loadable } from "jotai/utils";
 
 interface TData {
     copyright: string;
@@ -28,10 +27,6 @@ function Dashboard() {
     const [epic] = useAtom(epicAtom);
     // 화성 탐사차 사진 API 조회
     const [mars] = useAtom(marsAtom);
-
-    // 상태 로딩처리
-    const loadableAtom = loadable(marsAtom);
-    const [value] = useAtom(loadableAtom);
 
     return (
         <>
@@ -58,74 +53,70 @@ function Dashboard() {
                                 <WidgetSummary label={"지구 다색 이미징 카메라"} data={epic} />
                             </div>
                             <Card>
-                                {value.state === "loading" ? (
-                                    <div>Loading...</div>
-                                ) : (
-                                    <Table className="flex flex-col w-full h-full rounded-md">
-                                        <TableHeader>
-                                            <TableRow>
-                                                <TableHead className="text-sm text-center w-[80px]">
-                                                    <TooltipProvider delayDuration={100}>
-                                                        <Tooltip>
-                                                            <TooltipTrigger asChild>
-                                                                <Button variant={"ghost"} size={"icon"}>
-                                                                    <Image className="w-[18px] h-[18px]" />
-                                                                </Button>
-                                                            </TooltipTrigger>
-                                                            <TooltipContent side="bottom">
-                                                                <p className="font-normal">이미지</p>
-                                                            </TooltipContent>
-                                                        </Tooltip>
-                                                    </TooltipProvider>
-                                                </TableHead>
-                                                <TableHead className="font-normal text-sm text-center w-[224px]">Title</TableHead>
-                                                <TableHead className="font-normal text-sm text-center w-[224px]">Date</TableHead>
-                                                <TableHead className="font-normal text-sm text-center w-[224px]">
-                                                    <TooltipProvider delayDuration={100}>
-                                                        <Tooltip>
-                                                            <TooltipTrigger asChild>
-                                                                <Button variant={"ghost"} size={"icon"}>
-                                                                    <p>Version</p>
-                                                                </Button>
-                                                            </TooltipTrigger>
-                                                            <TooltipContent>
-                                                                <p className="font-normal">서비스 버전</p>
-                                                            </TooltipContent>
-                                                        </Tooltip>
-                                                    </TooltipProvider>
-                                                </TableHead>
-                                                <TableHead className="font-normal text-sm text-center w-[224px]">Media Type</TableHead>
-                                                <TableHead className="font-normal text-sm text-center w-[224px]">Copyright</TableHead>
-                                                <TableHead className="font-normal text-sm text-center w-[224px]">License</TableHead>
-                                            </TableRow>
-                                        </TableHeader>
-                                        <TableBody>
-                                            {mars.map((item: TData) => {
-                                                return (
-                                                    <TableRow className="cursor-pointer" key={item.title}>
-                                                        <TableCell className="flex items-center justify-center w-[80px] p-2">
-                                                            {item.media_type === "video" ? <Image className="w-10 h-10 text-neutral-300" /> : <img src={item.url} alt="" className="w-12 h-12 rounded-md" />}
-                                                        </TableCell>
-                                                        <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.title}</TableCell>
-                                                        <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.date}</TableCell>
-                                                        <TableCell className="table-cell font-normal text-center w-[224px] p-2">
-                                                            <Badge variant={"outline"} className="px-3 py-1 rounde-md">
-                                                                {item.service_version}
-                                                            </Badge>
-                                                        </TableCell>
-                                                        <TableCell className="table-cell font-normal text-center w-[224px] p-2">
-                                                            <Badge variant={"outline"} className="px-3 py-1 rounde-md">
-                                                                {item.media_type}
-                                                            </Badge>
-                                                        </TableCell>
-                                                        <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.copyright ? item.copyright : "-"}</TableCell>
-                                                        <TableCell className="table-cell font-normal text-center w-[224px] p-2">9Diin</TableCell>
-                                                    </TableRow>
-                                                );
-                                            })}
-                                        </TableBody>
-                                    </Table>
-                                )}
+                                <Table className="flex flex-col w-full h-full rounded-md">
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHead className="text-sm text-center w-[80px]">
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button variant={"ghost"} size={"icon"}>
+                                                                <Image className="w-[18px] h-[18px]" />
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent side="bottom">
+                                                            <p className="font-normal">이미지</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </TableHead>
+                                            <TableHead className="font-normal text-sm text-center w-[224px]">Title</TableHead>
+                                            <TableHead className="font-normal text-sm text-center w-[224px]">Date</TableHead>
+                                            <TableHead className="font-normal text-sm text-center w-[224px]">
+                                                <TooltipProvider delayDuration={100}>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button variant={"ghost"} size={"icon"}>
+                                                                <p>Version</p>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <p className="font-normal">서비스 버전</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
+                                            </TableHead>
+                                            <TableHead className="font-normal text-sm text-center w-[224px]">Media Type</TableHead>
+                                            <TableHead className="font-normal text-sm text-center w-[224px]">Copyright</TableHead>
+                                            <TableHead className="font-normal text-sm text-center w-[224px]">License</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {mars.map((item: TData) => {
+                                            return (
+                                                <TableRow className="cursor-pointer" key={item.title}>
+                                                    <TableCell className="flex items-center justify-center w-[80px] p-2">
+                                                        {item.media_type === "video" ? <Image className="w-10 h-10 text-neutral-300" /> : <img src={item.url} alt="" className="w-12 h-12 rounded-md" />}
+                                                    </TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.title}</TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.date}</TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">
+                                                        <Badge variant={"outline"} className="px-3 py-1 rounde-md">
+                                                            {item.service_version}
+                                                        </Badge>
+                                                    </TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">
+                                                        <Badge variant={"outline"} className="px-3 py-1 rounde-md">
+                                                            {item.media_type}
+                                                        </Badge>
+                                                    </TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">{item.copyright ? item.copyright : "-"}</TableCell>
+                                                    <TableCell className="table-cell font-normal text-center w-[224px] p-2">9Diin</TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
+                                    </TableBody>
+                                </Table>
                             </Card>
                         </div>
                     </section>

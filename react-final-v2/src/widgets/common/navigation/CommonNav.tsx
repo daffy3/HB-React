@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/shared/ui/navigation-menu";
 
 function CommonNav() {

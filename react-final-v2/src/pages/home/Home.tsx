@@ -94,7 +94,7 @@ function Home() {
                     <section className={styles.page__container__section}>
                         {/* 메뉴 카테고리 카드 컴포넌트 UI 삽입 부분 */}
                         {CATEGORY_WIDGETS.map((item: CategoryWidget) => {
-                            return <WidgetCategory data={item} />;
+                            return <WidgetCategory data={item} key={item.label} />;
                         })}
                     </section>
                 </div>
