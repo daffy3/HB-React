@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/shared/ui/navigation-menu";
 
 function CommonNav() {
@@ -26,7 +27,7 @@ function CommonNav() {
             </NavigationMenuList>
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+                    <NavigationMenuLink href="/dashboard" className={navigationMenuTriggerStyle()}>
                         React
                     </NavigationMenuLink>
                 </NavigationMenuItem>

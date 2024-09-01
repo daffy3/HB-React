@@ -1,22 +1,12 @@
 import { useAtom } from "jotai";
+import { TData } from "@/types";
 import { astronomyPhotoOfTodayAtom, NASAImageAndVideoLibraryAtom, epicAtom, marsAtom } from "@/store/atoms/dashboard";
-// COMPONENTS
+// Components
 import { CommonHeader, WidgetSummary } from "@/widgets";
 import { Badge, Button, Card, Table, TableHeader, TableRow, TableHead, TableBody, TableCell, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/shared";
 import { Image } from "lucide-react";
 // CSS
 import styles from "./page.module.scss";
-
-interface TData {
-    copyright: string;
-    date: string;
-    explanation: string;
-    hdurl: string;
-    media_type: string;
-    service_version: string;
-    title: string;
-    url: string;
-}
 
 function Dashboard() {
     // 오늘의 천문사진 API 조회

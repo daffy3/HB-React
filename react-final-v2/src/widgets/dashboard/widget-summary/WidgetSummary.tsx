@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
-// COMPONENTS
+// Components
 import { Badge, Card } from "@/shared";
 import { Rocket, Telescope, Earth } from "lucide-react";
-// TYPES
-import { AstronomyPhotoOfTodayType } from "@/types/astronomy-today";
-import { NASAImageAndVideoLibraryType } from "@/types/astronomy-imageAndVideo";
-import { AstronomyEpicType } from "@/types/astronomy-epic";
 // CSS
 import styles from "./widget-summary.module.scss";
+import { AstronomyPhotoOfTodayType, NASAImageAndVideoLibraryType, AstronomyEpicType } from "@/types";
 
 interface Props {
     label: string;

@@ -1,5 +1,6 @@
 import { CommonNav } from "@/widgets";
 import { Button } from "@/shared";
+// CSS
 import styles from "./header.module.scss";
 
 function CommonHeader() {

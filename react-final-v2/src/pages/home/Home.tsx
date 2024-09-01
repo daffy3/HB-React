@@ -1,6 +1,5 @@
-// COMPONENTS
 import { CommonHeader, WidgetCategory } from "@/widgets";
-import { Button } from "@/shared";
+import { Button } from "@/shared/ui/button";
 import { CodeXml, PowerCircle } from "lucide-react";
 // CSS
 import styles from "./page.module.scss";
@@ -94,7 +93,7 @@ function Home() {
                     <section className={styles.page__container__section}>
                         {/* 메뉴 카테고리 카드 컴포넌트 UI 삽입 부분 */}
                         {CATEGORY_WIDGETS.map((item: CategoryWidget) => {
-                            return <WidgetCategory data={item} key={item.label} />;
+                            return <WidgetCategory data={item} />;
                         })}
                     </section>
                 </div>

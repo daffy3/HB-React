@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/shared/ui/button";
-import { Card } from "@/shared/ui/card";
+// Components
+import { Button, Card } from "@/shared";
 import { ArrowRight } from "lucide-react";
 
 interface CategoryWidget {
