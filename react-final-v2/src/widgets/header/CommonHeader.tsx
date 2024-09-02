@@ -10,7 +10,7 @@ function CommonHeader() {
             <CommonNav />
             <div></div>
             <div className={styles.header__logo}>
-                <img src="src/assets/logo.svg" alt="" />
+                <img src="/logo.svg" alt="" />
             </div>
             <div className={styles.header__end}>
                 <Button variant="outline">회원가입</Button>
